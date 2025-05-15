@@ -1,6 +1,42 @@
-filters:
+# Refers to the version 1.2 of the .dockstore.yml schema
+version: 1.2
+
+# An array of workflows.
+workflows:
+
+  - name: CAMRA-Assembly_Quality_Control-WDL
+    subclass: WDL
+    primaryDescriptorPath: /Workflows/CAMRA_QC_WF.wdl
+    readMePath: /README.md
+    latestTagAsDefault: True
+    authors:
+      - orcid: 0009-0008-5199-2990 # Daniella Matute
+      - name: Thomas Clarke
+        email:toby.h.clarke@gmail.com
     branches:
-        - thclarke/*
-        - master
-    tags:
-        - .*/
+      - main 
+
+    
+  - name: CAMRA-Genome_Assembly-WDL
+    subclass: WDL
+    primaryDescriptorPath: /Workflows/CAMRA_ASM_WF.wdl
+    readMePath: /README.md
+    latestTagAsDefault: True
+    authors:
+      - orcid: 0009-0008-5199-2990 #Daniella Matute
+      - name: Andrew LaPointe
+        email: andrewrlapointe@gmail.com
+        
+
+  - name: Workflows/CAMRA_AMR_WF_NIGERIA.wdl
+    subclass: WDL
+    primaryDescriptorPath: /Workflows/CAMRA_AMR_WF_NIGERIA.wdl
+    readMePath: /README.md
+    latestTagAsDefault: True
+    authors:
+      - orcid: 0009-0008-5199-2990 #Daniella Matute
+    branches:
+      - main 
+      - thclarke/*I
+
+  
