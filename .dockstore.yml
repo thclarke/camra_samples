@@ -1,0 +1,6 @@
+filters:
+    branches:
+        - thclarke/*
+        - master
+    tags:
+        - .*/
