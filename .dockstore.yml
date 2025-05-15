@@ -12,7 +12,7 @@ workflows:
     authors:
       - orcid: 0009-0008-5199-2990 # Daniella Matute
       - name: Thomas Clarke
-        email:toby.h.clarke@gmail.com
+        email: toby.h.clarke@gmail.com
     branches:
       - main 
 
@@ -37,6 +37,6 @@ workflows:
       - orcid: 0009-0008-5199-2990 #Daniella Matute
     branches:
       - main 
-      - thclarke/*I
+      - thclarke/added-camera-files
 
   
