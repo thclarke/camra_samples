@@ -17,7 +17,7 @@ workflows:
       - main 
 
     
-  - name: CAMRA-Genome_Assembly-WDL
+  - name: CAMRAGenomeAssemblyWDL
     subclass: WDL
     primaryDescriptorPath: /Workflows/CAMRA_ASM_WF.wdl
     readMePath: /README.md
