@@ -37,6 +37,4 @@ workflows:
       - orcid: 0009-0008-5199-2990 #Daniella Matute
     branches:
       - main 
-      - thclarke/added-camera-files
-
   
