@@ -28,7 +28,7 @@ workflows:
         email: andrewrlapointe@gmail.com
         
 
-  - name: Workflows/CAMRA_AMR_WF_NIGERIA.wdl
+  - name: CAMRA_AMR_WF_NIGERIA.wdl
     subclass: WDL
     primaryDescriptorPath: /Workflows/CAMRA_AMR_WF_NIGERIA.wdl
     readMePath: /README.md
