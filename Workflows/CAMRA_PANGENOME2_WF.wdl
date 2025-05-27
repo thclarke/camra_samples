@@ -40,6 +40,7 @@ task makeFastaFiles {
 
   runtime{
         docker: "thclarke/pangenomepipeline:latest"
+	mem: "20 GiB"
   }
 }
 
