@@ -26,7 +26,7 @@ task makeFastaFiles {
      done
      makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
      find ./ -type f -name "blast_db*" > blast_list.txt
-     find /tmp/ -type f -name "*pep" > fasta_list.txt
+     find ./ -type f -name "*pep" > fasta_list.txt
 
 
 
