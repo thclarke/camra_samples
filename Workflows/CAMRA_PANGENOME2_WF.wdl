@@ -20,7 +20,7 @@ task makeFastaFiles {
      done
      cd /tmp/
      /pangenome/bin/parse_genbank_files.pl -l /tmp/genomes.list  -o  ./ --no_dos2unix
-     for f in ./*pep; do
+     for f in /tmp/fasta_dir/*pep; do
         cat $f >> /tmp/all_sequences.fasta
      done
      makeblastdb -in /tmp/all_sequences.fasta -dbtype ~{db_type} -out blast_db
