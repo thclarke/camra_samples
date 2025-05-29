@@ -18,7 +18,7 @@ task makeFastaFiles {
         echo "./gb_dir/"$(basename $fl) >> ./genomes.list
         echo "./gb_dir/"$(basename $fl)
      done
-     cd /tmp/
+     
      /pangenome/bin/parse_genbank_files.pl -l ./genomes.list  -o  ./ --no_dos2unix
      for f in /tmp/fasta_dir/*pep; do
         cat $f >> all_sequences.fasta
