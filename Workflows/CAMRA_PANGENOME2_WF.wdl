@@ -14,13 +14,14 @@ task makeFastaFiles {
      mkdir ./fasta_dir/
 
      for fl in ~{sep = " " gb_files}; do
-        cp $fl ./gb_dir/
-        echo "./gb_dir/"$(basename $fl) >> ./genomes.list
-        echo "./gb_dir/"$(basename $fl)
+        cp $fl ./
+        echo "./"$(basename $fl) >> genomes.list
+        echo "./"$(basename $fl)
      done
      
-     /pangenome/bin/parse_genbank_files.pl -l ./genomes.list  -o  ./ --no_dos2unix
-     for f in ./*pep; do
+     /pangenome/bin/parse_genbank_files.pl -l genomes.list  -o  ./ --no_dos2unix
+     for f in *pep; do
+        echo $f
         cat $f >> all_sequences.fasta
      done
      makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
