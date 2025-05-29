@@ -10,22 +10,22 @@ task makeFastaFiles {
     String db_type
   }
   command <<<
-     mkdir /tmp/gb_dir/
-     mkdir /tmp/fasta_dir/
+     mkdir ./gb_dir/
+     mkdir ./fasta_dir/
 
      for fl in ~{sep = " " gb_files}; do
-        cp $fl /tmp/gb_dir/
-        echo "/tmp/gb_dir/"$(basename $fl) >> /tmp/genomes.list
-        echo "/tmp/gb_dir/"$(basename $fl)
+        cp $fl .//gb_dir/
+        echo "./gb_dir/"$(basename $fl) >> genomes.list
+        echo "./gb_dir/"$(basename $fl)
      done
      cd /tmp/
-     /pangenome/bin/parse_genbank_files.pl -l /tmp/genomes.list  -o  /tmp/ --no_dos2unix
+     /pangenome/bin/parse_genbank_files.pl -l genomes.list  -o  ./ --no_dos2unix
      for f in /tmp/fasta_dir/*pep; do
-        cat $f >> /tmp/all_sequences.fasta
+        cat $f >> all_sequences.fasta
      done
-     makeblastdb -in /tmp/all_sequences.fasta -dbtype ~{db_type} -out blast_db
-     find /tmp/ -type f -name "blast_db*" > blast_list.txt
-     find /tmp/ -type f -name "*pep" > fasta_list.txt
+     makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
+     find ./ -type f -name "blast_db*" > blast_list.txt
+     find ./ -type f -name "*pep" > fasta_list.txt
 
 
 
