@@ -152,10 +152,8 @@ workflow pangenome   {
   scatter(fasta_file in makeFastaFiles.input_fastas) {
     call RunBlast {
       input:
-        query_fasta = fasta_file,
-        blast_db_prefix = makeFastaFiles.blast_db_prefix,
-        #blast_files = makeFastaFiles.blast_files,
-
+        query_fasta = fasta_file
+        blast_db_prefix = makeFastaFiles.blast_db_prefix
         db_type = db_type
       }
     }
