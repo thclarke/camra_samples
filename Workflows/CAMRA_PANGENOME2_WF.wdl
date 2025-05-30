@@ -33,7 +33,14 @@ task makeFastaFiles {
   >>>
 
   output {
-	Array[File] blast_files = read_lines("blast_list.txt")
+	File db_pjs = "blast_db.pjs"
+	File db_pjf = "blast_db.ptf"
+	File db_pta = "blast_db.pto"
+	File db_pot = "blast_db.pot"
+	File db_pdb = "blast_db.pdb"
+	File db_psq = "blast_db.psq"
+	File db_phr = "blast_db.phr"
+	File db_pin = "blast_db.pin"
 	String blast_db_prefix = "blast_db"
 	Array[File] input_fastas = read_lines("fasta_list.txt")
 
@@ -56,10 +63,10 @@ task RunBlast {
   }
 
   command <<<
-    for fl in ~{sep = " " blast_files}; do
-        cp $fl ./
-        echo $fl
-    done
+    #for fl in ~{sep = " " blast_files}; do
+     #   cp $fl ./
+     #   echo $fl
+    #done
     blastp -query ~{query_fasta} -db ~{blast_db_prefix} -out combined.blast -outfmt 6
   >>>
 
