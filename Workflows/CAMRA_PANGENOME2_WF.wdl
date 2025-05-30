@@ -25,8 +25,8 @@ task makeFastaFiles {
         cat $f >> all_sequences.fasta
      done
      makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
-     find ./ -type f -name "blast_db*" > blast_list.txt
-     find ./ -type f -name "*pep" > fasta_list.txt
+     find "$(pwd -P)" -type f -name "blast_db*" > blast_list.txt
+     find "$(pwd -P)" -type f -name "*pep" > fasta_list.txt
 
 
 
@@ -42,6 +42,7 @@ task makeFastaFiles {
 	File db_phr = "blast_db.phr"
 	File db_pin = "blast_db.pin"
 	String blast_db_prefix = "blast_db"
+	Array[File] blast_list = read_lines("blast_list.txt")
 	Array[File] input_fastas = read_lines("fasta_list.txt")
 
   }
