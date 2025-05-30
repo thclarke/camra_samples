@@ -34,7 +34,7 @@ task makeFastaFiles {
 
   output {
 	File db_pjs = "blast_db.pjs"
-	File db_pjf = "blast_db.ptf"
+	File db_ptf = "blast_db.ptf"
 	File db_pta = "blast_db.pto"
 	File db_pot = "blast_db.pot"
 	File db_pdb = "blast_db.pdb"
@@ -59,7 +59,6 @@ task RunBlast {
     File query_fasta
     String blast_db_prefix
     String db_type
-    Array[File] blast_files
   }
 
   command <<<
@@ -155,7 +154,7 @@ workflow pangenome   {
       input:
         query_fasta = fasta_file,
         blast_db_prefix = makeFastaFiles.blast_db_prefix,
-        blast_files = makeFastaFiles.blast_files,
+        #blast_files = makeFastaFiles.blast_files,
 
         db_type = db_type
       }
