@@ -62,10 +62,6 @@ task RunBlast {
   }
 
   command <<<
-    #for fl in ~{sep = " " blast_files}; do
-     #   cp $fl ./
-     #   echo $fl
-    #done
     blastp -query ~{query_fasta} -db ~{blast_db_prefix} -out combined.blast -outfmt 6
   >>>
 
