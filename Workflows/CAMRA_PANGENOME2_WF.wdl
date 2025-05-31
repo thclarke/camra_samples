@@ -33,18 +33,9 @@ task makeFastaFiles {
   >>>
 
   output {
-	File db_pjs = "blast_db.pjs"
-	File db_ptf = "blast_db.ptf"
-	File db_pta = "blast_db.pto"
-	File db_pot = "blast_db.pot"
-	File db_pdb = "blast_db.pdb"
-	File db_psq = "blast_db.psq"
-	File db_phr = "blast_db.phr"
-	File db_pin = "blast_db.pin"
+	Array[File] blast_files = glob("blast_db*")
 	String blast_db_prefix = "blast_db"
-	Array[File] blast_list = read_lines("blast_list.txt")
-	Array[File] input_fastas = read_lines("fasta_list.txt")
-
+	Array[File] input_fastas = glob("*pep")
   }
 
   runtime{
@@ -60,10 +51,14 @@ task RunBlast {
     File query_fasta
     String blast_db_prefix
     String db_type
+    Array[File] blast_files 
   }
 
   command <<<
-    blastp -query ~{query_fasta} -db ~{blast_db_prefix} -out combined.blast -outfmt 6
+    for fl in ~{sep = " " blast_files}; do
+        cp $fl ./
+        echo $fl
+    done blastp -query ~{query_fasta} -db ~{blast_db_prefix} -out combined.blast -outfmt 6
   >>>
 
   output {
@@ -151,7 +146,8 @@ workflow pangenome   {
       input:
         query_fasta = fasta_file,
         blast_db_prefix = makeFastaFiles.blast_db_prefix,
-        db_type = db_type
+        blast_files = makeFastaFiles.blast_files,
+	db_type = db_type
       }
     }
 
