@@ -95,10 +95,11 @@ task run_Pangenome {
     input {
        Array[File] gb_files
        File combined_blast
+       Integer gb_req
     }
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
-         #disks: "local-disk 100 SSD"
+        memory: "~{gb_req} GB"   # Request 4 GB of memory
 
     }
    	command <<<
@@ -133,6 +134,7 @@ workflow pangenome   {
     input {
         Array[File] gb_files
         String db_type
+	Integer gb_req
     }
 
 
@@ -162,7 +164,8 @@ workflow pangenome   {
     call run_Pangenome {
         input:
             gb_files = gb_files,
-            combined_blast = makeCombinedBlast.blast_output
+            combined_blast = makeCombinedBlast.blast_output,
+            gb_req = gb_req
     }
 
 
