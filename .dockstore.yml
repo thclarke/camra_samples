@@ -60,7 +60,7 @@ workflows:
   
   - name: CAMRA_GETGB_WF_WDL
     subclass: WDL
-    primaryDescriptorPath: /Workflows/CAMRA_GETGENBANK_WF.wdll
+    primaryDescriptorPath: /Workflows/CAMRA_GETGENBANK_WF.wdl
     readMePath: /README.md
     latestTagAsDefault: True
     authors:
