@@ -10,11 +10,12 @@ task resolve_samn_to_assembly {
     elink -target assembly |
      efetch -format docsum  > out.txt
      cat out.txt | xtract -pattern DocumentSummary -element AssemblyAccession > assembly.txt
-
-      cat out.txt |xtract -pattern DocumentSummary -element FtpPath_RefSeq > genbank.txt
-     if (du genbank.txt | cut -f1 == '0'); do 
-         cat out.txt |xtract -pattern DocumentSummary -element FtpPath_GenBank > genbank.txt
-     done;
+     cat out.txt |xtract -pattern DocumentSummary -element FtpPath_RefSeq > genbank.txt
+     if [[-s genbank.txt]]; then
+         cat out.txt |xtract -pattern DocumentSummary -element FtpPath_RefSeq > genbank.txt
+     else
+          cat out.txt |xtract -pattern DocumentSummary -element FtpPath_GenBank > genbank.txt
+     fi 
      cat out.txt | xtract -pattern DocumentSummary -element AssemblyName > AssemblyName.txt
     >>>
 
