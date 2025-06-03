@@ -88,6 +88,10 @@ meta {
       AssemblyName = resolve_samn_to_assembly.AssemblyName
   }
 
+  output {
+   File  genbank_file = download_genbank.genbank_file
+  }
+
 }
 
 
