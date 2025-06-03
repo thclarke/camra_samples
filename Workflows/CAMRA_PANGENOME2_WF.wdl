@@ -95,7 +95,7 @@ task run_Pangenome {
     input {
        Array[File] gb_files
        File combined_blast
-       Integer gb_req
+       Int gb_req
     }
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
@@ -134,7 +134,7 @@ workflow pangenome   {
     input {
         Array[File] gb_files
         String db_type
-	Integer gb_req
+	Int gb_req
     }
 
 
