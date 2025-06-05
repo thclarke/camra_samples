@@ -20,10 +20,12 @@ task makeFastaFiles {
      done
      
      /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
+     cd pep
      for f in *pep; do
         echo $f
-        cat $f >> all_sequences.fasta
+        cat $f >> ../all_sequences.fasta
      done
+     cd ..
      makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
      find "$(pwd -P)" -type f -name "blast_db*" > blast_list.txt
      find "$(pwd -P)" -type f -name "*pep" > fasta_list.txt
