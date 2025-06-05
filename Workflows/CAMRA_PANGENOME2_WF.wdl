@@ -15,11 +15,11 @@ task makeFastaFiles {
 
      for fl in ~{sep = " " gb_files}; do
         cp $fl ./
-        echo "./"$(basename $fl) >> genomes.list
-        echo "./"$(basename $fl)
+        #echo "./"$(basename $fl) >> genomes.list
+        echo $fl | awk -F'\.' '{ print $1"\t./"$0; }' >> genomes.list
      done
      
-     /pangenome/bin/parse_genbank_files.pl -l genomes.list  -o  ./ --no_dos2unix
+     /usr/bin/perl /scratch/tclarke/git/PanGenomePipeline/pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
      for f in *pep; do
         echo $f
         cat $f >> all_sequences.fasta
