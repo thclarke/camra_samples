@@ -19,7 +19,7 @@ task makeFastaFiles {
         echo $fl | awk -F'\.' '{ print $1"\t./"$0; }' >> genomes.list
      done
      
-     /usr/bin/perl /scratch/tclarke/git/PanGenomePipeline/pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
+     /usr/bin/perl /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
      for f in *pep; do
         echo $f
         cat $f >> all_sequences.fasta
