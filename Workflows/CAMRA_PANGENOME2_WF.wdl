@@ -16,7 +16,7 @@ task makeFastaFiles {
      for fl in ~{sep = " " gb_files}; do
         cp $fl ./
         #echo "./"$(basename $fl) >> genomes.list
-        echo $(basename $fl) | awk -F'\.' -v DIR=ENVIRON["PWD"] '{ print $1"\t"DIR""$0; }' >> genomes.list
+        echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir""$0; }' >> genomes.list
      done
      
      /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
