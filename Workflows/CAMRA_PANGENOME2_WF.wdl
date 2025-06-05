@@ -19,7 +19,7 @@ task makeFastaFiles {
         echo $(basename $fl) | awk -F'\.' -v DIR = ENVIRON["PWD"] '{ print $1"\t"DIR""$0; }' >> genomes.list
      done
      
-     /usr/bin/perl /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
+     /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
      for f in *pep; do
         echo $f
         cat $f >> all_sequences.fasta
