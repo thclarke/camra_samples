@@ -25,8 +25,8 @@ task makeFastaFiles {
         echo $f
         if $f != "genome.pep"; then
             cat $f >> ../all_sequences.fasta
-	    mv $f ../
-	fi
+        mv $f ../
+     fi
      done
      cd ..
      makeblastdb -in all_sequences.fasta -dbtype ~{db_type} -out blast_db
@@ -38,9 +38,9 @@ task makeFastaFiles {
   >>>
 
   output {
-	Array[File] blast_files = glob("blast_db*")
-	String blast_db_prefix = "blast_db"
-	Array[File] input_fastas = glob("*pep")
+    Array[File] blast_files = glob("blast_db*")
+    String blast_db_prefix = "blast_db"
+    Array[File] input_fastas = glob("*pep")
   }
 
   runtime{
