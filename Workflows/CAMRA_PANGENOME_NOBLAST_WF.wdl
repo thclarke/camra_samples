@@ -5,6 +5,7 @@ task run_Pangenome {
     input {
        Array[File] gb_files
        File combined_blast
+       Int hdd_sz
        Int gb_req
     }
     runtime{
@@ -54,7 +55,7 @@ workflow pangenome   {
         input:
             gb_files = gb_files,
             combined_blast = blast_output,
-            gb_req = gb_req
+            gb_req = gb_req,
             hdd_sz = hdd_sz
     }
 
