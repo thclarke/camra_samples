@@ -14,13 +14,13 @@ task run_Pangenome {
         disks: "local-disk ~{ hdd_sz } HDD" 
 
     }
-   	command <<<
+    command <<<
         mkdir gb_dir
         touch gb.list
         for fl in ~{sep = " " gb_files}; do
           cp $fl ./gb_dir/
-          echo $fl | awk -F "." -d dir="$(pwd)'{ print($1"\t"$dir"/"$0); }' >> gb.list
-		done
+           echo $fl | awk -F "." -d dir="$(pwd)'{ print($1"\t"$dir"/"$0); }' >> gb.list
+      done
         
         cp ~{combined_blast} ./
         /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
