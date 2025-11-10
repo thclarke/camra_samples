@@ -15,7 +15,7 @@ task run_Pangenome {
 
     }
     command <<<
-        mkdir gb_dir
+        mkdir ./gb_dir
         touch gb.list
         cd gb_dir
         for fl in ~{sep = " " gb_files}; do
