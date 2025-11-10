@@ -16,9 +16,12 @@ task run_Pangenome {
     }
    	command <<<
         mkdir gb_dir
+        touch gb.list
         for fl in ~{sep = " " gb_files}; do
           cp $fl ./gb_dir/
-        done
+          echo $fl | awk -F "." -d dir="$(pwd)'{ print($1"\t"$dir"/"$0); }' >> gb.list
+		done
+        
         cp ~{combined_blast} ./
         /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
