@@ -19,7 +19,7 @@ task run_Pangenome {
         touch gb.list
         for fl in ~{sep = " " gb_files}; do
           cp $fl ./gb_dir/
-           echo $fl | awk -F "." -d dir="$(pwd)" '{ print($1"\t"$dir"/"$0); }' >> gb.list
+           echo $(basename fl) | awk -F "." -v dir="$(pwd)" '{ print($1"\t"$dir"/"$0); }' >> gb.list
       done
         
         cp ~{combined_blast} ./
