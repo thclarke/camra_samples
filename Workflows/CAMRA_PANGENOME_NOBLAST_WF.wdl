@@ -22,8 +22,8 @@ task run_Pangenome {
           echo $fl
           cp $fl ./
           echo $(basename fl) | awk -F "." -v dir="$(pwd)" '{ print($1"\t"$dir"/"$0); }' >> ../gb.list
-      done
-        
+        done
+        cd ..
         cp ~{combined_blast} ./
         /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
