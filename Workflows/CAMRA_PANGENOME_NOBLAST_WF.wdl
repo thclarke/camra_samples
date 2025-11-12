@@ -11,10 +11,11 @@ task run_Pangenome {
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
         memory: "~{gb_req} GB"   # Request 4 GB of memory
-        disks: "local-disk ~{hdd_sz} SSD"
+        disks: "/mnt/ ~{hdd_sz} SSD"
 
     }
     command <<< 
+        cd /mnt/
         mkdir ./gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
@@ -22,8 +23,8 @@ task run_Pangenome {
           echo $fl
           cp $fl ./gb_dir/
           echo $(pwd)
-          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ print($1"\t"dir"/"$0); }' >> gb.list
-          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0; }'
+          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ print($1"\t"dir"/gb_dir/"$0); }' >> gb.list
+          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
