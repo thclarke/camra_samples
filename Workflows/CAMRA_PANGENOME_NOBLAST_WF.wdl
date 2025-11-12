@@ -17,6 +17,7 @@ task run_Pangenome {
     command <<<
         mkdir ./gb_dir
         touch gb.list
+        echo ~{sep = " " gb_files}
         for fl in ~{sep = " " gb_files}; do
           echo $fl
           cp $fl ./gb_dir/
@@ -25,7 +26,7 @@ task run_Pangenome {
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
-        /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
+        perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
     output {
         File pangenome_centroids = "results/centroids.fasta.cleaned"
