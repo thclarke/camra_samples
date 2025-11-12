@@ -21,8 +21,8 @@ task run_Pangenome {
         for fl in ~{sep = " " gb_files}; do
           echo $fl
           cp $fl ./
-          echo $(basename $fl) | awk -F "." -v dir="$(pwd)" '{ print($1"\t"dir"/"$0); }' >> ../gb.list
-          echo $(basename $fl) | awk -F "." -v dir="$(pwd)" '{ system("echo \'"$1"\t"dir"/"$0"\'"); }'
+          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ print($1"\t"dir"/"$0); }' >> ../gb.list
+          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0); }'
         done
         cd ..
         cp ~{combined_blast} ./
