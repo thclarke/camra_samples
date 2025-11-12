@@ -11,10 +11,10 @@ task run_Pangenome {
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
         memory: "~{gb_req} GB"   # Request 4 GB of memory
-        disks: "local-disk ~{hdd_sz} HDD" 
 
     }
     command <<<
+        #disks: "local-disk ~{hdd_sz} HDD" 
         mkdir ./gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
