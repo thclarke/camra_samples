@@ -21,13 +21,13 @@ task run_Pangenome {
         echo ~{sep = " " gb_files}
         for fl in ~{sep = " " gb_files}; do
           echo $fl
-          cp $fl ./gb_dir/
+          mv $fl ./gb_dir/
           echo $(pwd)
           echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ print($1"\t"dir"/gb_dir/"$0); }' >> gb.list
           echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
         echo ~{combined_blast} 
-        cp ~{combined_blast} ./
+        mv ~{combined_blast} ./
         perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
     output {
