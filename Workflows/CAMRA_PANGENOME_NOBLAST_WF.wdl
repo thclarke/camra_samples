@@ -86,7 +86,7 @@ workflow pangenome   {
         File pangenome_fgi_report = run_Pangenome.pangenome_fgi_report
         File pangenome_tigrfam = run_Pangenome.pangenome_tigrfam
         File pangenome_pfam = run_Pangenome.pangenome_pfam
-        File gb_list = run_Pangenome.gb_list"
+        File gb_list = run_Pangenome.gb_list
    
     }
 
