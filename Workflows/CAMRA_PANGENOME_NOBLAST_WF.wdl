@@ -28,7 +28,7 @@ task run_Pangenome {
         for f in *~{gb_name}; do
             echo "$f"
             chmod +rw "$f"
-            mv "$f" ./gb_dir.
+            mv "$f" ./gb_dir/
             echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
             echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0; }'
         done
