@@ -33,6 +33,7 @@ task run_Pangenome {
             echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
             echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
+        cat gb.list
         perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
     output {
