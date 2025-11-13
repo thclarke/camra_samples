@@ -20,13 +20,19 @@ task run_Pangenome {
         echo ~{sep = " " gb_files}
         for fl in ~{sep = " " gb_files}; do
           echo $fl
-          mv $fl ./gb_dir/
-          echo $(pwd)
-          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ print($1"\t"dir"/gb_dir/"$0); }' >> gb.list
-          echo $(basename $fl) | awk -F "\." -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
+          cp "$fl" ./
         done
         echo ~{combined_blast} 
-        mv ~{combined_blast} ./
+        cp ~{combined_blast} ./
+        for f in *gb; do
+            echo "$f"
+            chmod +rw "$f"
+            if [ $f != "genomes.pep" ]; then
+                mv "$f" ./gb_dir.
+                echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
+                echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0; }'
+            fi
+        done
         perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
     output {
