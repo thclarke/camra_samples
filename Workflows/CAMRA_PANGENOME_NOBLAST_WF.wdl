@@ -5,6 +5,7 @@ task run_Pangenome {
     input {
        Array[File] gb_files
        File combined_blast
+       String gb_name
        Int hdd_sz
        Int gb_req
     }
@@ -24,7 +25,7 @@ task run_Pangenome {
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
-        for f in *gb; do
+        for f in *~{gb_name}; do
             echo "$f"
             chmod +rw "$f"
             if [ $f != "genomes.pep" ]; then
@@ -58,7 +59,7 @@ workflow pangenome   {
 
     input {
         Array[File] gb_files
-        String db_type
+        String gb_name
         File blast_output
         Int hdd_sz
 	      Int gb_req
@@ -69,7 +70,8 @@ workflow pangenome   {
             gb_files = gb_files,
             combined_blast = blast_output,
             gb_req = gb_req,
-            hdd_sz = hdd_sz
+            hdd_sz = hdd_sz,
+            gb_name = gb_name
     }
 
 
