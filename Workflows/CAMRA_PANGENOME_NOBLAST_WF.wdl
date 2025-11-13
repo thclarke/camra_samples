@@ -22,11 +22,11 @@ task run_Pangenome {
         echo ~{sep = " " gb_files}
         for fl in ~{sep = " " gb_files}; do
           echo $fl
-          cp "$fl" ./
+          cho $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("cp "$0" "dir"/"$1".gb"); }'
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
-        for f in *~{gb_name}; do
+        for f in *~.gb; do
             echo "$f"
             chmod +rw "$f"
             mv "$f" ./gb_dir/
