@@ -11,7 +11,7 @@ task run_Pangenome {
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
         memory: "~{gb_req} GB"   # Request 4 GB of memory
-        disk: "~{hdd_sz} GB"
+        disks: "local-disk ~{hdd_sz} HDD" 
 
     }
     command <<< 
