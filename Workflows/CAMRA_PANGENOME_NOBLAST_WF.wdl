@@ -16,7 +16,7 @@ task run_Pangenome {
 
     }
     command <<< 
-        mkdir ./gb_dir
+        mkdir gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
         for fl in ~{sep = " " gb_files}; do
@@ -28,15 +28,14 @@ task run_Pangenome {
         for f in *~{gb_name}; do
             echo "$f"
             chmod +rw "$f"
-            if [ $f != "genomes.pep" ]; then
-                mv "$f" ./gb_dir.
-                echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
-                echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0; }'
-            fi
+            mv "$f" ./gb_dir.
+            echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
+            echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ echo $1"\t"dir"/"$0; }'
         done
         perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
     >>>
     output {
+        File gb_list = "gb.list"
         File pangenome_centroids = "results/centroids.fasta.cleaned"
         File pangenome_stats = "results/overview_stats.txt"
         File pangenome_presence = "results/all_clusters_member_presence.txt"
@@ -87,6 +86,8 @@ workflow pangenome   {
         File pangenome_fgi_report = run_Pangenome.pangenome_fgi_report
         File pangenome_tigrfam = run_Pangenome.pangenome_tigrfam
         File pangenome_pfam = run_Pangenome.pangenome_pfam
+        File gb_list = run_Pangenome.gb_list"
+   
     }
 
 }
