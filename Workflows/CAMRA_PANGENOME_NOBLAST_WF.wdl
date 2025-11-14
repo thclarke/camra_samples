@@ -31,11 +31,11 @@ task run_Pangenome {
             echo "$f"
             chmod +rw "$f"
             mv "$f" ./gb_dir/
-            echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
+            echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> genomes.list
             echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
         cat gb.list
-        perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local
+        perl /pangenome/bin/run_pangenome.pl --genome_list_file genomes.list --no_blast --no_grid --panoct_local
     >>>
     output {
         File gb_list = "/mnt/gb.list"
