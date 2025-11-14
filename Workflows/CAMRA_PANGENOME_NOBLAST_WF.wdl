@@ -34,7 +34,7 @@ task run_Pangenome {
             echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
             echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
-        /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
+        /pangenome/bin/core_hmm_checker_prep.pl -g gb.list  -o ./
         touch combined.fasta
         touch combined.att
         cd pep
