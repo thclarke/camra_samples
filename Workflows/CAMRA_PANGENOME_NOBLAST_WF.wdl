@@ -23,7 +23,7 @@ task run_Pangenome {
         for fl in ~{sep = " " gb_files}; do
           echo $fl
           cp "$fl" ./
-          echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("mv "$0" "dir"/"$0); }'
+          #echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("mv "$0" "dir"/"$0); }'
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
@@ -31,8 +31,8 @@ task run_Pangenome {
             echo "$f"
             chmod +rw "$f"
             mv "$f" ./gb_dir/
-            echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> genomes.list
-            echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
+            echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> genomes.list
+            echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
         cat gb.list
         perl /pangenome/bin/run_pangenome.pl --genome_list_file genomes.list --no_blast --no_grid --panoct_local
