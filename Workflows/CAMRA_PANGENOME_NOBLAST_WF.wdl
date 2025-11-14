@@ -43,7 +43,6 @@ task run_Pangenome {
          chmod +rw $f
          if [ $f != "genomes.pep" ]; then
             cat "$f" >> ../combined.fasta
-            mv $f ../
          fi
         done
         for f in *patt; do
@@ -51,7 +50,6 @@ task run_Pangenome {
           chmod +rw $f
           if [ $f != "genomes.patt" ]; then
              cat "$f" >> ../combined.att
-             mv $f ../
           fi
         done
         cd..
