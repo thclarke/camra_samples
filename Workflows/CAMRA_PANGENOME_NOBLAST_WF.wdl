@@ -23,11 +23,11 @@ task run_Pangenome {
         for fl in ~{sep = " " gb_files}; do
           echo $fl
           cp "$fl" ./
-          echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("mv "$0" "dir"/"$1".gb"); }'
+          echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("mv "$0" "dir"/"$0); }'
         done
         echo ~{combined_blast} 
         cp ~{combined_blast} ./
-        for f in *.gb; do
+        for f in *.~{gb_name}; do
             echo "$f"
             chmod +rw "$f"
             mv "$f" ./gb_dir/
@@ -35,7 +35,7 @@ task run_Pangenome {
             echo $(basename $fl) | awk -F'\.gb' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
         cat gb.list
-        perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local
+        perl /pangenome/bin/run_pangenome.pl --gb_list gb.list --no_blast --no_grid --panoct_local
     >>>
     output {
         File gb_list = "/mnt/gb.list"
