@@ -34,8 +34,29 @@ task run_Pangenome {
             echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
             echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
         done
+        /pangenome/bin/core_hmm_checker_prep.pl -g genomes.list  -o ./
+        touch combined.fasta
+        touch combined.att
+        cd pep
+        for f in *pep; do
+         echo $f
+         chmod +rw $f
+         if [ $f != "genomes.pep" ]; then
+            cat "$f" >> ../combined.fasta
+            mv $f ../
+         fi
+        done
+        for f in *patt; do
+          echo $f
+          chmod +rw $f
+          if [ $f != "genomes.patt" ]; then
+             cat "$f" >> ../combined.att
+             mv $f ../
+          fi
+        done
+        cd..
         cat gb.list
-        perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local
+        perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
     >>>
     output {
         File gb_list = "/mnt/gb.list"
