@@ -38,6 +38,7 @@ task run_Pangenome {
         touch combined.fasta
         touch combined.att
         cd pep
+        echo $(pwd)
         for f in *pep; do
          echo $f
          chmod +rw $f
@@ -52,7 +53,7 @@ task run_Pangenome {
              cat "$f" >> ../combined.att
           fi
         done
-        cd..
+        cd ..
         cat gb.list
         perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
     >>>
