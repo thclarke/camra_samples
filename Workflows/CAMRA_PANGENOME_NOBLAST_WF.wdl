@@ -12,11 +12,11 @@ task run_Pangenome {
     runtime{
         docker: "thclarke/pangenomepipeline:latest"
         memory: "~{gb_req} GB"   # Request 4 GB of memory
-        disks: "/mnt/ ~{hdd_sz} HDD" 
+        disks: "local-disk ~{hdd_sz} HDD" 
 
     }
     command <<< 
-        cd /mnt/
+        cd ./
         mkdir gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
@@ -31,31 +31,36 @@ task run_Pangenome {
             echo "$f"
             chmod +rw "$f"
             mv "$f" ./gb_dir/
-            echo $(basename $fl) | awk -F'\.' -v dir="$(pwd)" '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
-            echo $(basename $fl) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
+            #if [ -e ./gb_dir/$(basename $f) ]; then
+            echo "--"$(basename $f)
+            echo $(basename $f) | awk -F'\.' -v dir="$(pwd)"  '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
+            echo $(basename $f) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
+            #fi
         done
         /pangenome/bin/core_hmm_checker_prep.pl -g gb.list  -o ./
         touch combined.fasta
         touch combined.att
+        echo -n > gb.list
+        cat  gb.list
+        DIR="$PWD"
+        echo $DIR
         cd pep
-        echo $(pwd)
-        for f in *pep; do
-         echo $f
-         chmod +rw $f
-         if [ $f != "genomes.pep" ]; then
-            cat "$f" >> ../combined.fasta
-         fi
-        done
         for f in *patt; do
-          echo $f
           chmod +rw $f
-          if [ $f != "genomes.patt" ]; then
+          echo "$f"
+          if [  -s "$f" ]; then
              cat "$f" >> ../combined.att
-          fi
+             mv "$f" ./att_dir/
+             echo $(basename $f) | awk -F'\.' -v dir="$(DIR)" '{ print $1"\t"dir"/gb_dir/"$1".gb"; }' >> ../gb.list
+           fi
+           if [ ! -s "$f" ]; then
+              echo $(basename $f) | awk -F'\.' -v dir="$(DIR)" '{ system("rm ../gb_dir/"$1".gb"); }'
+           fi
         done
-        cd ..
+        cd ../
         cat gb.list
-        perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
+        #perl /pangenome/bin/run_pangenome.pl --gb_ gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
+        perl /pangenome/bin/run_pangenome.pl --gb_dir $DIR/gb_dir/ --no_blast --no_grid --panoct_local --panoct_verbose
     >>>
     output {
         File gb_list = "/mnt/gb.list"
