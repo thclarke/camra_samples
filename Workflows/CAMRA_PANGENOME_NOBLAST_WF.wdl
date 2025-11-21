@@ -33,8 +33,8 @@ task run_Pangenome {
             mv "$f" ./gb_dir/
             #if [ -e ./gb_dir/$(basename $f) ]; then
             echo "--"$(basename $f)
-            echo $(basename $f) | awk -F'\.' -v dir="$(pwd)"  '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
-            echo $(basename $f) | awk -F'\.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
+            echo $(basename $f) | awk -F'.~{gb_name}' -v dir="$(pwd)"  '{ print $1"\t"dir"/gb_dir/"$0; }' >> gb.list
+            echo $(basename $f) | awk -F'.~{gb_name}' -v dir="$(pwd)" '{ system("echo "$1"\t"dir"/gb_dir/"$0); }'
             #fi
         done
         /pangenome/bin/core_hmm_checker_prep.pl -g gb.list  -o ./
@@ -52,10 +52,10 @@ task run_Pangenome {
           if [  -s "$f" ]; then
              #cat "$f" >> ../combined.att
              #mv "$f" ../att_dir/
-             echo $(basename $f) | awk -F'\.patt' -v dir="$DIR" '{ print $1"\t"dir"/gb_dir/"$1".~{gb_name}"; }' >> ../gb.list
+             echo $(basename $f) | awk -F'.patt' -v dir="$DIR" '{ print $1"\t"dir"/gb_dir/"$1".~{gb_name}"; }' >> ../gb.list
            fi
            if [ ! -s "$f" ]; then
-              echo $(basename $f) | awk -F'\.patt' -v dir="$DIR" '{ system("rm ../gb_dir/"$1".~{gb_name}"); }'
+              echo $(basename $f) | awk -F'.patt' -v dir="$DIR" '{ system("rm ../gb_dir/"$1".~{gb_name}"); }'
            fi
         done
         cd ../
