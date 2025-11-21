@@ -55,7 +55,7 @@ task run_Pangenome {
              echo $(basename $f) | awk -F'\.patt' -v dir="$DIR" '{ print $1"\t"dir"/gb_dir/"$1".~{gb_name}"; }' >> ../gb.list
            fi
            if [ ! -s "$f" ]; then
-              echo $(basename $f) | awk -F'\.' -v dir="$DIR" '{ system("rm ../gb_dir/"$1".~{gb_name}"); }'
+              echo $(basename $f) | awk -F'\.patt' -v dir="$DIR" '{ system("rm ../gb_dir/"$1".~{gb_name}"); }'
            fi
         done
         cd ../
