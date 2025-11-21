@@ -61,7 +61,7 @@ task run_Pangenome {
         cd ../
         cat gb.list
         #perl /pangenome/bin/run_pangenome.pl --gb_ gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
-        perl /pangenome/bin/run_pangenome.pl --gb_dir ./gb_dir/ --no_blast --no_grid --panoct_local --panoct_verbose
+        perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --panoct_verbose
     >>>
     output {
         File gb_list = "/mnt/gb.list"
