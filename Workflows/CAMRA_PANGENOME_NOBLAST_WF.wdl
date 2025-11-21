@@ -52,7 +52,7 @@ task run_Pangenome {
           if [  -s "$f" ]; then
              #cat "$f" >> ../combined.att
              #mv "$f" ../att_dir/
-             echo $(basename $f) | awk -F'\.' -v dir="$DIR" '{ print $1"\t"dir"/gb_dir/"$1".~{gb_name}"; }' >> ../gb.list
+             echo $(basename $f) | awk -F'\.patt' -v dir="$DIR" '{ print $1"\t"dir"/gb_dir/"$1".~{gb_name}"; }' >> ../gb.list
            fi
            if [ ! -s "$f" ]; then
               echo $(basename $f) | awk -F'\.' -v dir="$DIR" '{ system("rm ../gb_dir/"$1".~{gb_name}"); }'
