@@ -42,6 +42,7 @@ task run_Pangenome {
         touch combined.att
         echo -n > gb.list
         cat  gb.list
+        mkdir att_dir
         DIR="$PWD"
         echo $DIR
         cd pep
@@ -49,8 +50,8 @@ task run_Pangenome {
           chmod +rw $f
           echo "$f"
           if [  -s "$f" ]; then
-             cat "$f" >> ../combined.att
-             mv "$f" ./att_dir/
+             #cat "$f" >> ../combined.att
+             #mv "$f" ../att_dir/
              echo $(basename $f) | awk -F'\.' -v dir="$(DIR)" '{ print $1"\t"dir"/gb_dir/"$1".gb"; }' >> ../gb.list
            fi
            if [ ! -s "$f" ]; then
