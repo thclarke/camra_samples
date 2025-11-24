@@ -15,7 +15,7 @@ task run_Pangenome {
         disks: "local-disk ~{ hdd_size } HDD"  # Request 4 GB of memory
     }
     command <<< 
-        cd ~/
+        #cd ~/
         mkdir gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
