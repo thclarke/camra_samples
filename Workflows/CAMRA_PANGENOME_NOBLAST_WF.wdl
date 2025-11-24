@@ -15,7 +15,7 @@ task run_Pangenome {
         disks: "local-disk ~{ hdd_sz } HDD"  # Request 4 GB of memory
     }
     command <<< 
-        cd ~/
+        cd /tmp/
         mkdir gb_dir
         touch gb.list
         echo ~{sep = " " gb_files}
@@ -64,17 +64,17 @@ task run_Pangenome {
         perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --panoct_verbose
     >>>
     output {
-        File gb_list = "/mnt/gb.list"
-        File pangenome_centroids = "/mnt/results/centroids.fasta.cleaned"
-        File pangenome_stats = "/mnt/results/overview_stats.txt"
-        File pangenome_presence = "/mnt/results/all_clusters_member_presence.txt"
-        File pangenome_fs ="/mnt/results/frameshifts.txt"
-        File pangenome_roles = "/mnt/results/centroids.cluster_roles.txt"
-        File pangenome_aro = "/mnt/results/aro_searches/centroids.fasta.cleaned.aro.txt"
-        File pangenome_fgi_index = "/mnt/results/fGIs/fGI_report.txt.index"
-        File pangenome_fgi_report = "/mnt/results/fGIs/fGI_report.txt"
-        File pangenome_tigrfam = "/mnt/results/centroids.fasta_TIGRFAMs_15.0_HMM.tblout"
-        File pangenome_pfam = "/mnt/results/centroids.fasta_Pfam-A.tblout"
+        File gb_list = "gb.list"
+        File pangenome_centroids = "results/centroids.fasta.cleaned"
+        File pangenome_stats = "results/overview_stats.txt"
+        File pangenome_presence = "results/all_clusters_member_presence.txt"
+        File pangenome_fs ="results/frameshifts.txt"
+        File pangenome_roles = "results/centroids.cluster_roles.txt"
+        File pangenome_aro = "results/aro_searches/centroids.fasta.cleaned.aro.txt"
+        File pangenome_fgi_index = "results/fGIs/fGI_report.txt.index"
+        File pangenome_fgi_report = "results/fGIs/fGI_report.txt"
+        File pangenome_tigrfam = "results/centroids.fasta_TIGRFAMs_15.0_HMM.tblout"
+        File pangenome_pfam = "results/centroids.fasta_Pfam-A.tblout"
     }
 }
 
