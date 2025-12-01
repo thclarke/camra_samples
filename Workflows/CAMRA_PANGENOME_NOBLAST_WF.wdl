@@ -75,6 +75,13 @@ task run_Pangenome {
         File pangenome_fgi_report = "results/fGIs/fGI_report.txt"
         File pangenome_tigrfam = "results/centroids.fasta_TIGRFAMs_15.0_HMM.tblout"
         File pangenome_pfam = "results/centroids.fasta_Pfam-A.tblout"
+    	File pangenome_core_att = "results/fGIs/Core.attfGI";            
+        File pangenome_shared = "results/shared_clusters.txt";             
+        File pangenome_conses_in = "results/fGIs/consensus.txt";          
+        File pangenome_fgi_insert = "results/fGIs/FGI_inserts.details";    
+        File pangenome_fgi_att = "results/fGIs/fGI.att";          
+        File pangenome_comb_att = "combined.att";                     
+        File pangenome_sing_cluster = "results/singletons_clusters.txt";
     }
 }
 
