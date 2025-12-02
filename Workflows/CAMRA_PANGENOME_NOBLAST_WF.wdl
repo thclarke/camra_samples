@@ -62,6 +62,7 @@ task run_Pangenome {
         cat gb.list
         #perl /pangenome/bin/run_pangenome.pl --gb_ gb.list --no_blast --no_grid --panoct_local --combined_fasta ./combined.fasta --combined_att ./combined.att 
         perl /pangenome/bin/run_pangenome.pl --gb_list_file gb.list --no_blast --no_grid --panoct_local --panoct_verbose
+        perl /PanACEA/make_panacea_flatfile.pl -i ./ -o ./PanACEA.flatfile.txt -t Pangenome
     >>>
     output {
         File gb_list = "gb.list"
@@ -75,13 +76,14 @@ task run_Pangenome {
         File pangenome_fgi_report = "results/fGIs/fGI_report.txt"
         File pangenome_tigrfam = "results/centroids.fasta_TIGRFAMs_15.0_HMM.tblout"
         File pangenome_pfam = "results/centroids.fasta_Pfam-A.tblout"
-    	File pangenome_core_att = "results/fGIs/Core.attfGI";            
-        File pangenome_shared = "results/shared_clusters.txt";             
-        File pangenome_conses_in = "results/fGIs/consensus.txt";          
-        File pangenome_fgi_insert = "results/fGIs/FGI_inserts.details";    
-        File pangenome_fgi_att = "results/fGIs/fGI.att";          
-        File pangenome_comb_att = "combined.att";                     
-        File pangenome_sing_cluster = "results/singletons_clusters.txt";
+    	File pangenome_core_att = "results/fGIs/Core.attfGI"            
+        File pangenome_shared = "results/shared_clusters.txt"             
+        File pangenome_conses_in = "results/fGIs/consensus.txt"          
+        File pangenome_fgi_insert = "results/fGIs/FGI_inserts.details"    
+        File pangenome_fgi_att = "results/fGIs/fGI.att"          
+        File pangenome_comb_att = "combined.att"
+        File pangenome_sing_cluster = "results/singletons_clusters.txt"
+        File panacea_flatfile = "PanACEA.flatfile.txt:
     }
 }
 
@@ -123,7 +125,7 @@ workflow pangenome   {
         File pangenome_tigrfam = run_Pangenome.pangenome_tigrfam
         File pangenome_pfam = run_Pangenome.pangenome_pfam
         File gb_list = run_Pangenome.gb_list
-   
+        File panacea_flatfile = run_Pangenome.panacea_flatfile 
     }
 
 }
