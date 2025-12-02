@@ -83,7 +83,7 @@ task run_Pangenome {
         File pangenome_fgi_att = "results/fGIs/fGI.att"          
         File pangenome_comb_att = "combined.att"
         File pangenome_sing_cluster = "results/singletons_clusters.txt"
-        File panacea_flatfile = "PanACEA.flatfile.txt:
+        File panacea_flatfile = "PanACEA.flatfile.txt"
     }
 }
 
