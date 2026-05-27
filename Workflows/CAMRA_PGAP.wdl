@@ -30,7 +30,7 @@ workflow annotation_analysis   {
         supplemental_data = pgap_supplemental_data, # Refer to https://github.com/ncbi/pgap/wiki/Installation
         taxon = scientific_name, # Example "Escherichia coli"
         pgap_version = "2026-04-27.build8516"
-
+    }
     output {
 
         File? pgap_ani_tax_report = pgap_annotate.pgap_ani_tax_report
@@ -47,7 +47,5 @@ workflow annotation_analysis   {
         File? pgap_completeness_contamination = pgap_annotate.pgap_completeness_contamination
         File? pgap_log = pgap_annotate.pgap_log
 
-
-    }
     }
 }
