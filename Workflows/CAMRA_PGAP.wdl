@@ -16,7 +16,7 @@ workflow annotation_analysis   {
     }
     input {
         String scientific_name # Example "Escherichia coli"
-
+        String sample_name
         File pgap_supplemental_data
         File local_assembly_path
 
