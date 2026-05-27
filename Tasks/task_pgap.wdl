@@ -190,7 +190,7 @@ task pgap_annotate {
     } 
 
     runtime {
-        docker: "danylmb/pgap:2024-07-18.build7555"
+        docker: "ncbi/pgap:2026-04-27.build8516"
         memory:"~{memory} GB"
         cpu: "~{cpu}"
         disks: "local-disk ~{disk_size} SSD"
