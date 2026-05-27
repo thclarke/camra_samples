@@ -21,8 +21,7 @@ workflow annotation_analysis   {
         File local_assembly_path
 
         # Use if the assembly is stored in BV-BRC
-      }    }
- 
+      }   
 
     call pgap.pgap_annotate {
     input:
@@ -50,3 +49,5 @@ workflow annotation_analysis   {
 
 
     }
+    }
+}
