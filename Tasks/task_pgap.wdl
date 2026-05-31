@@ -168,7 +168,7 @@ task pgap_annotate {
         
         CODE
 
-        cwltool --timestamps --debug --disable-color --preserve-entire-environment /pgap/pgap-2024-07-18.build7555/pgap.cwl ./controller.yaml
+        cwltool --timestamps --debug --disable-color --preserve-entire-environment /pgap/pgap/pgap.cwl ./controller.yaml
         bash -c 'rename_id="~{sample_id}_"; for file in "$@"; do [ -e "$file" ] && mv -- "$file" "${rename_id}${file}"; done; exit 0' -- ani-tax-report.txt ani-tax-report.xml annot.faa annot.fna annot.gbk annot.gff annot.sqn annot_cds_from_genomic.fna annot_translated_cds.faa annot_with_genomic_fasta.gff calls.tab checkm.txt cwltool.log
         
     >>>
