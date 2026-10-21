@@ -40,7 +40,7 @@ task run_hAMRonize {
         File assembly
     }
     runtime{
-        docker: 'thclarke/harmonization'
+        docker: 'thclarke/harmonization_new:latest'
         continueOnReturnCode: [0, 1]
     }
 
