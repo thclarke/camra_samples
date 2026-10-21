@@ -88,7 +88,7 @@ workflows:
     branches:
       - main
   
- - name: CAMRA_HAMRONIZATION_WF
+  - name: CAMRA_HAMRONIZATION_WF
     subclass: WDL
     primaryDescriptorPath: /Workflows/CAMRA_AMR_HARMONIZATION_WF.wdl
     readMePath: /README.md
